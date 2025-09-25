@@ -1,0 +1,1 @@
+<img src="{{ asset('images/al.png') }}" alt="Nova Logo" width="140" height="50">

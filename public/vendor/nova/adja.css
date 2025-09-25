@@ -1,0 +1,62 @@
+:root {
+    --primary: #0c3a6a;
+    --primary-dark: rgba(5, 5, 5, 0.8);
+    --primary-70: rgba(218, 119, 31, 0.7);
+    --primary-50: #0c3a6a;
+    --primary-30: rgba(228, 26, 97, 0.3);
+    --primary-10: rgba(80, 117, 202, 0.1);
+    --sidebar-icon: #b92119;
+    --logo: white;
+}
+
+.bg-grad-sidebar {
+    background-image: linear-gradient(to top, #0c3a6a ,white);
+    color: #b92119; /* couleur du texte */
+
+}
+
+/* nova-custom.css */
+.nova-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.nova-checkbox input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.nova-checkbox .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.nova-checkbox .slider:before {
+    content: "";
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: #ffffff;
+    transition: 0.4s;
+}
+
+.nova-checkbox input:checked + .slider {
+    background-color: #ffffff;
+}
+
+.nova-checkbox input:checked + .slider:before {
+    transform: translateX(20px);
+}

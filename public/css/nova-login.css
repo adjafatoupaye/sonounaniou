@@ -1,0 +1,22 @@
+body {
+    background-color: #b92119 !important;
+}
+
+.login-card {
+    border-radius: 16px;
+    padding: 2rem;
+    background: #0c3a6a;
+    box-shadow: 0 10px 30px white;
+}
+
+/* LOGO personnalisé */
+.login-card::before {
+    content: "";
+    display: block;
+    height: 90px;
+    margin-bottom: 2rem;
+    background-image: url('/images/al.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
