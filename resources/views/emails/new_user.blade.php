@@ -7,7 +7,7 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f7f7f7;
-            color: #333;
+            color: #080808ff;
             line-height: 1.6;
         }
         .container {
@@ -60,10 +60,10 @@
         <p>Un compte a été créé pour vous sur notre plateforme AL AMINE HUMAN CAPITAL.</p>
         <div class="credentials">
             <p><strong>Email :</strong> {{ $notifiable->email }}</p>
-            <p><strong>Mot de passe :</strong> {{ $password }}</p>
+            <p><strong>Mot de passe:</strong> {{ $password }}</p>
         </div>
         <p>Nous vous conseillons de modifier votre mot de passe après votre première connexion.</p>
-        <a href="{{ url('/login') }}" class="btn">Se connecter</a>
+        <a href="http://localhost:3000" class="btn">Se connecter</a>
         <p>Merci et bienvenue parmi nous !</p>
     </div>
 </div>

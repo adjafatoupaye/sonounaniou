@@ -25,7 +25,7 @@ class NewUserNotification extends Notification implements ShouldQueue
 
     public function toMail($notifiable)
 {
-    $logoUrl = url('/images/al.png'); // URL publique du logo
+    $logoUrl = asset('images/al.png');
 
     return (new MailMessage)
         ->subject('Bienvenue sur AL AMINE HUMAN CAPITAL')

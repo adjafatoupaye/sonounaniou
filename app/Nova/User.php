@@ -61,8 +61,9 @@ class User extends Resource
 
             Password::make('Password')
                 ->onlyOnForms()
-                ->creationRules('required', 'string', 'min:8')
-                ->updateRules('nullable', 'string', 'min:8'),
+                ->fillUsing(function ($request, $model, $attribute, $requestAttribute) {
+                 // Mettre un mot de passe par défaut "motdepasseconnu"
+                 $model->{$attribute} = bcrypt('motdepasseconnu');  }),
 
             // Dropdown pour choisir le rôle
             Select::make('Role', 'role')

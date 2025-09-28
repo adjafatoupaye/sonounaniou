@@ -13,7 +13,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.0",
         "laravel/nova": "*",
-        "laravel/sanctum": "^2.14",
+        "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.7",
         "slash2nl/nova-back-button": "^1.0",
         "spatie/laravel-permission": "^6.21"
