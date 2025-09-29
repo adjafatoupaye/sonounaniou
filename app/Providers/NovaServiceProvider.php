@@ -55,7 +55,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         //     ]);
         // });
          Gate::define('viewNova', function ($user) {
-        return $user->hasRole('administrateur') || $user->hasRole('formateur');
+        return $user->hasRole('administrateur') || $user->hasRole('formateur') || $user->hasRole('apprenant');
     });
     }
 
