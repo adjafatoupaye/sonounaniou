@@ -1,0 +1,137 @@
+/* --- Header global --- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 25px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Logo */
+.logo img {
+  height: 60px; /* taille agrandie */
+  width: auto;
+  border-radius: 12px; /* coins arrondis */
+  transition: all 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(52, 152, 219, 0.4); /* léger glow */
+}
+
+/* Barre de recherche */
+.search-bar {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 20px 0 0 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.5);
+}
+
+.search-bar button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 20px 20px 0;
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-bar button:hover {
+  background: linear-gradient(135deg, #2c3e50, #1abc9c);
+  transform: scale(1.05);
+}
+
+/* Profil utilisateur */
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #2c3e50;
+  transition: all 0.2s ease;
+}
+
+.user-name:hover {
+  color: #3498db;
+}
+
+.user-icon {
+  margin-left: 8px;
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+/* Dropdown pour déconnexion */
+.dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  min-width: 150px;
+  z-index: 1001;
+}
+
+.btn-logout {
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #e74c3c;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: #c0392b;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-bar {
+    display: none; /* cache la barre de recherche sur mobile */
+  }
+
+  .logo img {
+    height: 50px; /* légèrement réduit sur mobile */
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+}

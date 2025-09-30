@@ -1,0 +1,167 @@
+/* Structure principale */
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+/* Partie gauche */
+.left-panel {
+  flex: 1;
+  background: linear-gradient(135deg, #0c3a6a, #8fc9eb);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  position: relative;
+}
+
+.site-title {
+  padding: 30px;
+  text-align: center;
+}
+
+.site-title h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.site-title p {
+  font-size: 1.1rem;
+  margin-top: 5px;
+  opacity: 0.9;
+}
+
+.slide {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  transition: all 1s ease-in-out;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.overlay h2 {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+/* Partie droite */
+.right-panel {
+  flex: 1;
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Titre formulaire */
+.form-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  color: #1b263b;
+}
+
+/* Champs */
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.input-icon {
+  position: relative;
+}
+
+.input-icon i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.input-icon input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.input-icon input:focus {
+  border-color: #1b263b;
+  box-shadow: 0 0 8px rgba(65, 90, 119, 0.5);
+}
+
+/* Options */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0 20px;
+  font-size: 0.9rem;
+}
+
+.forgot-link {
+  color: #0c3a6a;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Bouton */
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #0c3a6a, #8fc9eb);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btn-login:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #8fc9eb, #0c3a6a);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
