@@ -10,22 +10,22 @@
     }
 
     .btn-primary {
-        background-color: #0c3a6a;
-        border-color: #0c3a6a;
+        background-color: #2d558a;
+        border-color: #2d558a;
         color: white;
     }
 
     .btn-primary:hover {
-        background-color: #0c3a6a;
+        background-color: #0B3D2E;
     }
 
     .text-primary {
-        color: #0c3a6a;
+        color: #2d558a;
     }
 
     .form-control:focus {
-        border-color: #0c3a6a;
-        box-shadow: 0 0 0 0.2rem rgba(65, 123, 159, 0.25);
+        border-color: #2d558a;
+        box-shadow: 0 0 0 0.2rem rgba(21, 115, 71, 0.25);
     }
 
     .text-danger {

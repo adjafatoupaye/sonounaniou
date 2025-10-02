@@ -1,7 +1,7 @@
 <p class="mt-8 text-center text-xs text-80">
-    <a href="https://alaminegroupe.com/" class="text-primary dim no-underline">Al AMINE</a>
+    <a href="" class="text-primary dim no-underline">Al Amine</a>
     <span class="px-1">&middot;</span>
-    &copy; {{ date('Y') }}  Tous droits reservés - By A.F.PAYE - D.TIMERA.
+    &copy; {{ date('Y') }}  Tous droits reservés - By Adja F.PAYE & Diariatou Timera.
     <span class="px-1">&middot;</span>
     <!-- v{{ \Laravel\Nova\Nova::version() }} -->
 </p>
