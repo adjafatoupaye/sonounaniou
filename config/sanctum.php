@@ -19,7 +19,7 @@ return [
     //     env('APP_URL') ? ','.parse_url(env('APP_URL'), PHP_URL_HOST) : ''
     // ))),
 
-    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 'localhost:3000')),
+'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 'localhost:3000')),
 
 
     /*

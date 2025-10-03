@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { FaSearch, FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
 export default function Header({ userName }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Si tu veux, tu peux aussi supprimer les infos de session :
+    localStorage.removeItem("userName");
+    navigate("/"); // ← redirige vers la page Login
+  };
 
   return (
     <header className="app-header">
@@ -30,7 +38,9 @@ export default function Header({ userName }) {
         </span>
         {dropdownOpen && (
           <div className="dropdown">
-            <button className="btn-logout">Déconnexion</button>
+            <button className="btn-logout" onClick={handleLogout}>
+              Déconnexion
+            </button>
           </div>
         )}
       </div>

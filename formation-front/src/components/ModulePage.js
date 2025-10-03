@@ -14,6 +14,4 @@ export default function ModuleCard({ title }) {
       <p>Quiz</p>
     </div>
   );
-
-  
 }

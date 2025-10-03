@@ -1,11 +1,13 @@
 import { useState } from "react";
-import Header from "../components/Header.js"; 
-import { FaBook, FaBullseye, FaCalendarAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header.js"; // Header importé
+import { FaBook, FaBullseye, FaCalendarAlt, FaHome } from "react-icons/fa";
 import "./Jour.css";
 
 export default function Jour1() {
+  const navigate = useNavigate();
   const [openSection, setOpenSection] = useState(null);
-  const [openContent, setOpenContent] = useState({}); 
+  const [openContent, setOpenContent] = useState({}); // pour supports, vidéo, quiz
 
   const userName = localStorage.getItem("userName") || "Utilisateur";
 
@@ -28,16 +30,35 @@ export default function Jour1() {
   // Supports PDF + description
   const supports = [
     {
-      title: "Support Jour 1",
-      file: "/cours/Sequence1.pdf",
+      title:
+        "Séquence 1 : Preparer la transformation vers une GED intelligente",
+      file: "/cours/2-Preparer-la-transformation-vers-une-GED-intelligente.pptx.pdf",
       description:
         "Ce module traite des bases de la GED (Gestion Électronique des Documents), ses principes fondamentaux et des cas pratiques pour mieux comprendre son utilisation en entreprise.",
     },
     {
-      title: "Support Jour 2",
-      file: "/cours/Sequence2.pdf",
+      title: "Séquence 2 : Préparer et piloter la transformation Digitale",
+      file: "/cours/3-Atelier_Diagnostic_Interactif_SENELEC (a mettre en forme).pptx.pdf",
       description:
         "Ce module approfondit la GED intelligente, en explorant les outils avancés et les techniques d’automatisation pour améliorer la productivité et la gestion documentaire.",
+    },
+    {
+      title: "Séquence 3 : Présentation de DocuWare",
+      file: "/cours/4-2024 Présentation de l´entreprise DocuWare FR (9).pptx.pdf",
+      description:
+        "Ce module traite des bases de la GED (Gestion Électronique des Documents), ses principes fondamentaux et des cas pratiques pour mieux comprendre son utilisation en entreprise.",
+    },
+    {
+      title: "Séquence 4 : Présentation de Alamine Groupe",
+      file: "/cours/5-AL Amine Groupe Juillet 2025.pptx.pdf",
+      description:
+        "Ce module approfondit la GED intelligente, en explorant les outils avancés et les techniques d’automatisation pour améliorer la productivité et la gestion documentaire.",
+    },
+    {
+      title: "Séquence 5 : Docuware IDP présentation",
+      file: "/cours/6-DocuWare IDP Presentation.pptx.pdf",
+      description:
+        "Ce module traite des bases de la GED (Gestion Électronique des Documents), ses principes fondamentaux et des cas pratiques pour mieux comprendre son utilisation en entreprise.",
     },
   ];
 
@@ -58,6 +79,15 @@ export default function Jour1() {
       <div className="jour-layout">
         <aside className="sidebar">
           <h2>Informations</h2>
+
+          {/* ----- BOUTON DASHBOARD ----- */}
+          <button
+            className="sidebar-dashboard-btn"
+            onClick={() => navigate("/dashboard")}
+          >
+            <FaHome className="icon" /> Dashboard
+          </button>
+
           <div className="accordion">
             {/* Description */}
             <div>
@@ -127,50 +157,29 @@ export default function Jour1() {
             <span className="scrolling-text">contenu du module</span>
           </div>
 
+          {/* Supports en 2 colonnes */}
           <h2>Supports</h2>
-          {supports.map((s, i) => (
-            <div key={i} className="card">
-              <h3>{s.title}</h3>
-              <div className="btn-group">
-                {/* Ouvrir le PDF dans une nouvelle page */}
-                <a
-                  href={s.file}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn"
-                >
-                  Ouvrir dans une nouvelle page
-                </a>
-
-                {/* Voir aperçu texte */}
-                <button
-                  className="btn"
-                  onClick={() => toggleContent(`support${i}`)}
-                >
-                  {openContent[`support${i}`]
-                    ? "▲ Masquer aperçu"
-                    : "▼ Voir aperçu"}
-                </button>
-              </div>
-
-              {openContent[`support${i}`] && (
-                <div
-                  className="preview-frame"
-                  style={{
-                    padding: "15px",
-                    background: "#f5f5f5",
-                    borderRadius: "12px",
-                  }}
-                >
-                  <p>{s.description}</p>
+          <div className="supports-container">
+            {supports.map((s, i) => (
+              <div key={i} className="card">
+                <h3>{s.title}</h3>
+                <div className="btn-group">
+                  <a
+                    href={s.file}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn"
+                  >
+                    Ouvrir le support
+                  </a>
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
 
           {/* Vidéo */}
           <section>
-            <h2>Vidéo explicative</h2>
+            <h2>Vidéos</h2>
             <div className="card">
               <button className="btn" onClick={() => toggleContent("video")}>
                 {openContent["video"]

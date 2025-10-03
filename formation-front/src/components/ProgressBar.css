@@ -1,0 +1,23 @@
+.progress-bar-sidebar {
+  height: 14px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 7px;
+  overflow: hidden;
+  margin: 10px 0;
+  position: relative;
+}
+
+.progress-bar-sidebar div {
+  height: 100%;
+  border-radius: 7px;
+  background: linear-gradient(90deg, #ffffff, #b92119);
+  transition: width 0.5s ease-in-out;
+}
+
+.progress-bar-sidebar p {
+  font-size: 0.8rem;
+  color: #fff;
+  margin-top: 5px;
+  text-align: center;
+}

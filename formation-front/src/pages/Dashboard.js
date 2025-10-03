@@ -1,6 +1,10 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Progress from "../components/Progress";
+import Header from "../components/Header.js";
+import ProgressBar from "../components/ProgressBar.js";
+import { useState, useEffect } from "react";
+import { FaChevronDown, FaChevronUp, FaBook } from "react-icons/fa";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import "./Dashboard.css";
 
 export default function Dashboard() {
@@ -8,100 +12,141 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const modules = [
-    { name: "Jour 1", path: "/jour1", img: "/image/jour1.jpeg", description: "Introduction à la GED" },
-    { name: "Jour 2", path: "/jour2", img: "/image/jour2.jpeg", description: "Organisation des documents" },
-    { name: "Jour 3", path: "/jour3", img: "/image/jour3.jpeg", description: "GED avancée et bonnes pratiques" },
+    {
+      name: "Jour 1",
+      path: "/jour1",
+      img: "/image/jour1.jpeg",
+      description: "Introduction à la GED",
+    },
+    {
+      name: "Jour 2",
+      path: "/jour2",
+      img: "/image/jour2.jpeg",
+      description: "Organisation des documents",
+    },
+    {
+      name: "Jour 3",
+      path: "/jour3",
+      img: "/image/jour3.jpeg",
+      description: "GED avancée et bonnes pratiques",
+    },
   ];
 
-  // Charger la progression sauvegardée (si existe)
-  const [consultedModules, setConsultedModules] = useState(() => {
-    const saved = localStorage.getItem("consultedModules");
+  const [completedModules, setCompletedModules] = useState(() => {
+    const saved = localStorage.getItem("completedModules");
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Sauvegarde automatique dans localStorage
+  const progressPercent = Math.round(
+    (completedModules.length / modules.length) * 100
+  );
+
   useEffect(() => {
-    localStorage.setItem("consultedModules", JSON.stringify(consultedModules));
-  }, [consultedModules]);
+    localStorage.setItem("completedModules", JSON.stringify(completedModules));
+  }, [completedModules]);
 
-  // Calcul progression
-  const progress = Math.round((consultedModules.length / modules.length) * 100);
-
-  // Quand un module est consulté
-  const handleModuleClick = (path, name) => {
-    if (!consultedModules.includes(name)) {
-      setConsultedModules([...consultedModules, name]);
+  const handleModuleClick = (mod) => {
+    if (!completedModules.includes(mod.name)) {
+      setCompletedModules([...completedModules, mod.name]);
     }
-    navigate(path);
+    navigate(mod.path);
   };
+
+  // Sidebar interactif
+  const [openSections, setOpenSections] = useState({
+    ebooks: false,
+  });
+
+  const toggleSection = (section) => {
+    setOpenSections({ ...openSections, [section]: !openSections[section] });
+  };
+
+  // État pour le calendrier
+  const [date, setDate] = useState(new Date());
 
   return (
     <div className="dashboard">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <img src="/image/al.png" alt="Logo Al Amine" className="logo-img" />
+      <Header />
 
-        <div className="sidebar-profile">
-          <h2>Tableau de bord</h2>
-          <h4>{studentName}</h4>
-          <p>Statut : Débutant</p>
-
-          <div className="progress-bar-sidebar">
-            <div
-              style={{
-                width: `${progress}%`,
-                background: "linear-gradient(90deg, #ffffffff, #b92119)",
-                height: "10px",
-                borderRadius: "5px",
-              }}
-            ></div>
+      <div className="dashboard-body">
+        {/* ---------------- SIDEBAR ---------------- */}
+        <aside className="sidebar">
+          {/* Profil + ProgressBar */}
+          <div className="sidebar-profile">
+            <h2>Tableau de bord</h2>
+            <h4>{studentName}</h4>
+            <p>Statut : Apprenant</p>
+            <ProgressBar progress={progressPercent} />
           </div>
-          <p>{progress}% des modules complétés</p>
-        </div>
 
-        {/* Bouton changer mot de passe */}
-        <div className="sidebar-change-password">
-          <button onClick={() => navigate("/change-password")}>Changer mon mot de passe</button>
-        </div>
-
-        {/* Astuce / citation */}
-        <div className="sidebar-quote">
-          <h4>Astuce du jour</h4>
-          <p>Organisez vos documents par thème pour progresser plus vite !</p>
-        </div>
-      </aside>
-
-      {/* Main content */}
-      <div className="main-content">
-        <header className="header">
-          <div className="scrolling-welcome">
-            <span>Bienvenue, {studentName}</span>
+          {/* ---------------- Mini-calendrier VISIBLE ---------------- */}
+          <div className="sidebar-section">
+            <div className="sidebar-content">
+              <Calendar
+                onChange={setDate}
+                value={date}
+                minDetail="month"
+                maxDetail="month"
+              />
+              <p style={{ marginTop: "8px", fontSize: "0.85rem" }}>
+                Date sélectionnée : {date.toLocaleDateString()}
+              </p>
+            </div>
           </div>
-        </header>
 
-        <section className="progress-section">
-          <h2>Votre progression</h2>
-          <Progress progress={progress} />
-        </section>
-
-        <section className="modules-section">
-          <h2>Vos modules</h2>
-          <div className="modules-container">
-            {modules.map((mod, index) => (
-              <div key={index} className="module-card">
-                <img src={mod.img} alt={mod.name} className="module-image" />
-                <h3>{mod.name}</h3>
-                <p>{mod.description}</p>
-                <button
-                  className="module-button"
-                  onClick={() => handleModuleClick(mod.path, mod.name)}
-                >
-                  Accéder
-                </button>
+          {/* Section Ebooks */}
+          <div className="sidebar-section">
+            <button
+              className="sidebar-button"
+              onClick={() => toggleSection("ebooks")}
+            >
+              <FaBook className="icon" /> Ebooks
+              {openSections.ebooks ? <FaChevronUp /> : <FaChevronDown />}
+            </button>
+            {openSections.ebooks && (
+              <div className="sidebar-content">
+                <ul>
+                  <li>Guide GED 2025.pdf</li>
+                  <li>Archivage probatoire.pdf</li>
+                  <li>Indexation intelligente.pdf</li>
+                </ul>
               </div>
-            ))}
+            )}
           </div>
-        </section>
+        </aside>
+
+        {/* ---------------- CONTENU PRINCIPAL ---------------- */}
+        <div className="main-content">
+          <section className="progress-section">
+            <h2>Objectif global</h2>
+            <p>
+              Ce séminaire formation a pour objectif de permettre aux
+              participants de passer d'une GED classique limitée à une GED
+              intelligente et automatisée, intégrant l’IA et l’archivage
+              probatoire pour améliorer la performance, la conformité et la
+              valeur stratégique de la gestion documentaire.
+            </p>
+          </section>
+
+          <section className="modules-section">
+            <h2>Vos modules</h2>
+            <div className="modules-container">
+              {modules.map((mod, index) => (
+                <div key={index} className="module-card">
+                  <img src={mod.img} alt={mod.name} className="module-image" />
+                  <h3>{mod.name}</h3>
+                  <p>{mod.description}</p>
+                  <button
+                    className="module-button"
+                    onClick={() => handleModuleClick(mod)}
+                  >
+                    Accéder
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );

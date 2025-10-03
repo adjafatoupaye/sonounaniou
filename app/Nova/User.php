@@ -60,10 +60,8 @@ class User extends Resource
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
             Password::make('Password')
-                ->onlyOnForms()
-                ->fillUsing(function ($request, $model, $attribute, $requestAttribute) {
-                 // Mettre un mot de passe par défaut "motdepasseconnu"
-                 $model->{$attribute} = bcrypt('motdepasseconnu');  }),
+                ->onlyOnForms(),
+                 
 
             // Dropdown pour choisir le rôle
             Select::make('Role', 'role')

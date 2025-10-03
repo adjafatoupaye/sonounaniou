@@ -14,22 +14,30 @@ return [
     | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     |
     */
+'paths' => ['api/*', 'sanctum/csrf-cookie'],
+'allowed_methods' => ['*'],
+'allowed_origins' => ['http://127.0.0.1:3000', 'http://localhost:3000'],
+'allowed_headers' => ['*'],
+'exposed_headers' => ['*'],
+'max_age' => 0,
+'supports_credentials' => true,
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['*'],
+    // 'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_origins' => ['*'],
+    // 'allowed_methods' => ['*'],
 
-    'allowed_origins_patterns' => [],
+    // 'allowed_origins' => ['*'],
 
-    'allowed_headers' => ['*'],
+    // 'allowed_origins_patterns' => [],
 
-    'exposed_headers' => [],
+    // 'allowed_headers' => ['*'],
 
-    'max_age' => 0,
+    // 'exposed_headers' => [],
 
-    'supports_credentials' => false,
+    // 'max_age' => 0,
+
+    // 'supports_credentials' => false,
 
 
 ];

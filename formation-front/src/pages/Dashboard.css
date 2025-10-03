@@ -1,177 +1,170 @@
-/* Layout global */
+/* --- Layout général --- */
 .dashboard {
   display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
   background-color: #f7f7f7;
-  overflow-x: hidden;
 }
 
-/* ------------------------ SIDEBAR GAUCHE MODERNE ------------------------ */
-.sidebar {
+/* --- Header --- */
+.dashboard .header {
+  width: 100%;
+  background-color: #fff;
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+/* --- Corps principal (sidebar + contenu) --- */
+.dashboard-body {
+  display: flex;
+  flex: 1;
+}
+
+/* --- Sidebar décorée gauche --- */
+.dashboard .sidebar {
   width: 280px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
+  background: linear-gradient(135deg, #0c3a6a, #bbd9eb, #1f4670, #bbd9eb);
   padding: 30px 20px;
+  border-right: 2px solid #d0d9e6;
+  box-shadow: 4px 0 28px rgba(0,0,0,0.08);
+  border-radius: 0 18px 18px 0;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to bottom, #ffffff 0%, #0c3a6a 100%);
-  color: #0c3a6a;
-  overflow-y: auto;
-  box-sizing: border-box;
-  box-shadow: 3px 0 15px rgba(0,0,0,0.1); /* légère ombre pour profondeur */
-  border-right: 1px solid rgba(255,255,255,0.2);
-  overflow: hidden;
+  color: #fff;
+  z-index: 1;
+  min-height: calc(100vh - 80px);
+}
 
+/* Cercles décoratifs flottants */
+.dashboard .sidebar::before,
+.dashboard .sidebar::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+  opacity: 0.15;
+  animation: float 12s ease-in-out infinite;
+}
+
+.dashboard .sidebar::before {
+  width: 220px;
+  height: 220px;
+  background: #8fc9eb;
+  top: -80px;
+  left: -100px;
+}
+
+.dashboard .sidebar::after {
+  width: 180px;
+  height: 180px;
+  background: #0c3a6a;
+  bottom: -60px;
+  right: -80px;
+  animation-delay: 4s;
 }
 
 /* Logo */
-.logo-img {
+.dashboard .logo-img {
   width: 120px;
   height: auto;
-  margin-bottom: 5px; /* ou 0px pour coller au texte */
+  margin-bottom: 10px;
+  z-index: 1;
+  position: relative;
 }
 
-
-/* Profil utilisateur */
-.sidebar-profile {
+/* Titre sidebar */
+.dashboard .sidebar h2 {
   text-align: center;
   margin-bottom: 25px;
+  color: #0c3a6a;
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: relative;
+  z-index: 1;
 }
 
-.sidebar-profile h2 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
+.dashboard .sidebar h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #8fc9eb, #0c3a6a);
+  margin: 10px auto 0 auto;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+}
+
+/* Profil */
+.dashboard .sidebar-profile {
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard .sidebar-profile h4 {
+  margin-top: 8px;
+  font-size: 1rem;
   color: #0c3a6a;
 }
 
-.sidebar-profile h4 {
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-  color: #0c3a6a;
-}
-
-.sidebar-profile p {
+.dashboard .sidebar-profile p {
   font-size: 0.9rem;
-  margin-bottom: 10px;
   color: #0c3a6a;
 }
 
-/* Barre de progression */
-.progress-bar-sidebar {
+/* Progress bar sidebar */
+.dashboard .progress-bar-sidebar {
   height: 10px;
   width: 100%;
-  background: rgba(12,58,106,0.15);
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 5px;
   margin: 10px 0;
+  position: relative;
   overflow: hidden;
 }
 
-.progress-bar-sidebar div {
+.dashboard .progress-bar-sidebar div {
   height: 100%;
   border-radius: 5px;
-  background: linear-gradient(90deg, #8fc9eb, #0c3a6a);
-  transition: width 0.5s ease;
+  background: #b92119;
 }
 
-/* Bouton changer mot de passe */
-.sidebar-change-password button {
-  width: 100%;
-  padding: 12px 15px;
-  background: linear-gradient(135deg, #0c3a6a, #8fc9eb);
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 6px 15px rgba(12,58,106,0.2);
-  margin-bottom: 20px;
-}
-
-.sidebar-change-password button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(12,58,106,0.3);
-  background: linear-gradient(135deg, #8fc9eb, #0c3a6a);
-}
-
-/* Astuce du jour */
-.sidebar-quote {
-  background: rgba(255,255,255,0.25);
-  padding: 15px;
-  border-radius: 15px;
-  font-size: 0.9rem;
-  line-height: 1.4rem;
-  text-align: center;
-  color: #0c3a6a;
-  margin-top: auto;
-  box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
-}
-
-/* Menu */
-.sidebar-menu ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 20px;
-}
-
-.sidebar-menu ul li {
-  margin: 10px 0;
-}
-
-.sidebar-menu ul li a {
-  color: #0c3a6a;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.sidebar-menu ul li a:hover {
-  color: #8fc9eb;
-}
-
-/* Changer mot de passe */
-.sidebar-change-password button {
-  width: 100%;
-  padding: 10px;
-  background-color: #0c3a6a;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Astuce / citation */
-.sidebar-quote {
-  background: rgba(255, 255, 255, 0.315);
+/* Citation */
+.dashboard .sidebar-quote {
+  background: rgba(255, 255, 255, 0.15);
   padding: 15px;
   border-radius: 10px;
   font-size: 0.9rem;
   line-height: 1.3rem;
   text-align: center;
   margin-top: auto;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+/* Animation flottante */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 /* Main content */
-.main-content {
-  margin-left: 300px; /* IMPORTANT : laisse la place pour la sidebar */
-  padding: 30px;
+.dashboard .main-content {
   flex: 1;
-  overflow-y: auto;
-  box-sizing: border-box;
+  padding: 30px;
 }
 
-/* Header texte défilant */
-.header {
-  margin-bottom: 25px;
-}
-
-.scrolling-welcome {
+/* Bandeau texte défilant */
+.dashboard .scrolling-welcome {
   overflow: hidden;
   white-space: nowrap;
   border-top: 2px solid #5a0e0e;
@@ -182,7 +175,7 @@
   margin-bottom: 20px;
 }
 
-.scrolling-welcome span {
+.dashboard .scrolling-welcome span {
   display: inline-block;
   padding-left: 100%;
   animation: scrollText 15s linear infinite;
@@ -196,36 +189,116 @@
   100% { transform: translateX(-100%); }
 }
 
-/* Progression */
-.progress-section {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
+/* --- Objectif Global visible et doux --- */
+.dashboard .progress-section {
+  background: linear-gradient(135deg, #72b0f3, #bbd9eb, #7bb1eb, #bbd9eb);
+  padding: 30px 35px;
+  border-radius: 22px;
   margin-bottom: 30px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 35px rgba(0,0,0,0.1), 0 0 15px rgba(140,200,235,0.25) inset;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #b92119; /* Changement de couleur et épaississement du cadre */
+  transition: transform 0.3s;
+}
+.dashboard .progress-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15), 0 0 25px rgba(140,200,235,0.3) inset;
 }
 
-.progress-section h2 {
-  margin-bottom: 15px;
-  color: #181a1f;
-  font-size: 1.2rem;
+.dashboard .progress-section::before,
+.dashboard .progress-section::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: float 16s ease-in-out infinite;
+  background: rgba(140, 200, 235, 0.3);
+}
+
+.dashboard .progress-section::before {
+  width: 180px;
+  height: 180px;
+  top: -60px;
+  left: -50px;
+}
+
+.dashboard .progress-section::after {
+  width: 120px;
+  height: 120px;
+  bottom: -50px;
+  right: -40px;
+  animation-delay: 5s;
+}
+
+.dashboard .progress-section h2 {
+  margin-bottom: 18px;
+  color: #0c3a6a;
+  font-size: 1.7rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard .progress-section p {
+  font-size: 1rem;
+  line-height: 1.6rem;
+  margin-bottom: 25px;
+  color: #333;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard .progress-section .progress-bar {
+  height: 16px;
+  width: 100%;
+  background: #c8d8e8;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 0 auto 15px auto;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.dashboard .progress-section .progress-bar div {
+  height: 100%;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #4a90e2, #8fc9eb);
+  width: 0%;
+  animation: fillProgress 2s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fillProgress {
+  from { width: 0%; }
+  to { width: 70%; } /* Ajustable */
+}
+
+.dashboard .progress-section small {
+  display: block;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 5px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Modules */
-.modules-section h2 {
+.dashboard .modules-section h2 {
   margin-bottom: 15px;
   color: #1b263b;
   font-size: 1.3rem;
 }
 
-.modules-container {
+.dashboard .modules-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: flex-start;
 }
 
-.module-card {
+.dashboard .module-card {
   background: #fff;
   width: 220px;
   border-radius: 12px;
@@ -238,12 +311,12 @@
   align-items: center;
 }
 
-.module-card:hover {
+.dashboard .module-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
 
-.module-image {
+.dashboard .module-image {
   width: 100%;
   height: 120px;
   object-fit: cover;
@@ -251,53 +324,181 @@
   margin-bottom: 10px;
 }
 
-.module-card h3 {
+.dashboard .module-card h3 {
   margin: 10px 0 5px 0;
   color: #1b263b;
   font-size: 1.1rem;
 }
 
-.module-card p {
+.dashboard .module-card p {
   font-size: 0.85rem;
   color: #333;
   margin-bottom: 10px;
 }
 
-.module-button {
+.dashboard .module-button {
   width: 100%;
   padding: 10px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(90deg, #ffffffff, #b92119);
-  color: #0e0e0e;
+  background: linear-gradient(90deg, #0c3a6a, #8fc9eb);
+  color: white;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   transition: 0.4s;
 }
 
-.module-button:hover {
+.dashboard .module-button:hover {
   transform: scale(1.05);
-  background: linear-gradient(90deg,#ffffffff, #0c3a6a);
+  background: linear-gradient(135deg, #4475aa, #b92119, #4475aa);
 }
 
 /* Responsive */
 @media (max-width: 1200px) {
-  .main-content {
-    margin-left: 0;
+  .dashboard {
+    flex-direction: column;
   }
-  .sidebar {
+
+  .dashboard .sidebar {
     width: 100%;
-    position: relative;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 15px;
+    overflow-x: auto;
+    border-radius: 0;
+  }
+
+  .dashboard .main-content {
+    padding: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .modules-container {
+  .dashboard .modules-container {
     justify-content: center;
   }
 
-  .scrolling-welcome span {
+  .dashboard .scrolling-welcome span {
     font-size: 1.2rem;
   }
 }
+
+
+
+
+/* ---------------- SIDEBAR SECTIONS ---------------- */
+.sidebar-section {
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Boutons interactifs du sidebar */
+.sidebar-button {
+  width: 100%;
+  padding: 10px 12px;
+  background: ffff;
+  border: none;
+  border-radius: 8px;
+  color: #0c3a6a;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar-button:hover {
+  background: linear-gradient(135deg, #4475aa, #b92119, #4475aa);
+  transform: translateX(3px);
+  color: white;
+}
+
+/* Icône React dans le bouton */
+.sidebar-button .icon {
+  margin-right: 8px;
+  font-size: 1.1rem;
+}
+
+/* Contenu dépliable */
+.sidebar-content {
+  background: white;
+  margin-top: 8px;
+  border-left: 4px solid #b92119; /* Bordure gauche rouge et épaisse */
+  padding: 10px 12px;
+  border-radius: 8px; /* Arrondi des coins */
+  font-size: 0.85rem;
+  color: #0c3a6a;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+
+/* Liste des ebooks */
+.sidebar-content ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.sidebar-content ul li {
+  margin-bottom: 6px;
+}
+
+/* Mini calendrier */
+.sidebar-content .react-calendar {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0c3a6a;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Changement de couleur des jours sélectionnés */
+.react-calendar__tile--active {
+  background: linear-gradient(90deg, #0c3a6a, #8fc9eb) !important;
+  color: #fff !important;
+  border-radius: 6px;
+}
+
+/* Animation fadeIn pour le contenu dépliable */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive pour sidebar */
+@media (max-width: 1200px) {
+  .sidebar-section {
+    margin-top: 10px;
+  }
+
+  .sidebar-button {
+    font-size: 0.9rem;
+  }
+
+  .sidebar-content {
+    font-size: 0.8rem;
+  }
+}
+
+
+
+/* Calendrier visible en haut, rapproché du profil */
+.sidebar-section:first-child .sidebar-content {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px;           /* moins de padding pour gagner de la place */
+  border-radius: 10px;
+  margin-top: 0px;       /* réduit l’espace au-dessus du calendrier */
+  margin-bottom: 15px;
+  color: #fff;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+}
+
+
+
+
+

@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Import pour la navigation
-import "./Login.css";
-
-const images = [
-  {
-    src: `${process.env.PUBLIC_URL}/image/apprenant-cncntr.jpg`,
-    text: "Nous avons pensé nos parcours pour être simples et accessibles à tous. Que vous soyez débutant ou déjà expérimenté, chaque module est conçu pour vous guider clairement et vous permettre de progresser sans difficulté.",
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/image/time.jpeg`,
-    text: "Chaque minute compte. Avec des contenus clairs et bien structurés, vous développez vos compétences efficacement",
-  },
-  {
-    src: `${process.env.PUBLIC_URL}/image/Ged.jpg`,
-    text: "Grâce à notre expertise en GED, nous transformons la gestion documentaire en un vrai moteur d’apprentissage. Vos ressources sont organisées, sécurisées et toujours disponibles.",
-  },
-];
+import { useNavigate } from "react-router-dom";
+import styles from "./Login.module.css"; // Module CSS
+import API from "../api"; // axios configuré avec withCredentials: true
 
 export default function Login() {
   const [current, setCurrent] = useState(0);
-  const navigate = useNavigate(); // ✅ Hook pour rediriger
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState(""); // Affichage des erreurs
+  const [loading, setLoading] = useState(false); // Pour désactiver le bouton
+  const navigate = useNavigate();
 
-  // Changement automatique des slides
+  const images = [
+    {
+      src: `${process.env.PUBLIC_URL}/image/apprenant-cncntr.jpg`,
+      text: "Nous avons pensé nos parcours pour être simples et accessibles à tous...",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/image/time.jpeg`,
+      text: "Chaque minute compte. Avec des contenus clairs et bien structurés...",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/image/Ged.jpg`,
+      text: "Grâce à notre expertise en GED, nous transformons la gestion documentaire...",
+    },
+  ];
+
+  // Slider automatique
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -29,70 +34,101 @@ export default function Login() {
     return () => clearInterval(interval);
   }, []);
 
-  // Fonction déclenchée au clic sur "Se connecter"
-  const handleSubmit = (e) => {
+  // Fonction de connexion
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/dashboard"); // 👉 redirige vers la page Dashboard étudiant
+    setErr("");
+    setLoading(true);
+
+    try {
+      // 1️⃣ Récupération CSRF cookie pour Sanctum
+      await API.get("/sanctum/csrf-cookie");
+
+      // 2️⃣ Requête de login
+      const res = await API.post("/api/login", { email, password });
+
+      // 3️⃣ Sauvegarde du token et redirection
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+      setErr(
+        error.response?.data?.message || "Email ou mot de passe incorrect"
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="login-container">
-      {/* Partie gauche */}
-      <div className="left-panel">
-        <div className="site-title">
+    <div className={styles["login-container"]}>
+      {/* Partie gauche : slider */}
+      <div className={styles["left-panel"]}>
+        <div className={styles["site-title"]}>
           <h1>Alamine Groupe</h1>
           <p>Learning Plateforme</p>
         </div>
         <div
-          className="slide"
+          className={styles.slide}
           style={{ backgroundImage: `url(${images[current].src})` }}
         >
-          <div className="overlay">
+          <div className={styles.overlay}>
             <h2>{images[current].text}</h2>
           </div>
         </div>
       </div>
 
-      {/* Partie droite */}
-      <div className="right-panel">
-        <div className="form-box">
+      {/* Partie droite : formulaire */}
+      <div className={styles["right-panel"]}>
+        <div className={styles["form-box"]}>
           <h2>Connexion</h2>
           <form onSubmit={handleSubmit}>
-            <div className="input-group">
+            <div className={styles["input-group"]}>
               <label>Email</label>
-              <div className="input-icon">
+              <div className={styles["input-icon"]}>
                 <i className="fas fa-envelope"></i>
                 <input
                   type="email"
                   placeholder="Entrez votre email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
             </div>
 
-            <div className="input-group">
+            <div className={styles["input-group"]}>
               <label>Mot de passe</label>
-              <div className="input-icon">
+              <div className={styles["input-icon"]}>
                 <i className="fas fa-lock"></i>
                 <input
                   type="password"
                   placeholder="Entrez votre mot de passe"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
             </div>
 
-            <div className="options">
+            <div className={styles.options}>
               <label>
                 <input type="checkbox" /> Se souvenir de moi
               </label>
-              <a href="/forgot-password" className="forgot-link">
+              <a href="/forgot-password" className={styles["forgot-link"]}>
                 Mot de passe oublié ?
               </a>
             </div>
 
-            <button type="submit" className="btn-login">
-              Se connecter
+            {/* Affichage des erreurs */}
+            {err && <p style={{ color: "red", marginTop: "10px" }}>{err}</p>}
+
+            <button
+              type="submit"
+              className={styles["btn-login"]}
+              disabled={loading}
+            >
+              {loading ? "Connexion..." : "Se connecter"}
             </button>
           </form>
         </div>

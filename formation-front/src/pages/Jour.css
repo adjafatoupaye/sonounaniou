@@ -41,7 +41,7 @@
 /* --- Sidebar décorée gauche --- */
 .jour-layout .sidebar {
   width: 280px;
-  background: linear-gradient(to bottom, #ffffff 0%, #0c3a6a 100%);
+  background: linear-gradient(135deg, #0c3a6a, #bbd9eb, #1f4670, #bbd9eb);
   padding: 30px 20px;
   border-right: 1px solid rgba(255,255,255,0.2);
   box-shadow: 3px 0 15px rgba(0,0,0,0.1);
@@ -111,7 +111,7 @@
   width: 100%;
   text-align: left;
   padding: 14px 18px;
-  margin: 12px 0;
+  margin: 10px 0;
   font-size: 16px;
   font-weight: 600;
   border: none;
@@ -129,7 +129,7 @@
 .jour-layout .accordion button::before {
   content: "▸";
   font-size: 14px;
-  color: #0c3a6a;
+  color: #b92119;
   transition: transform 0.3s ease;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .jour-layout .accordion button:hover {
-  background: #0c3a6a;
+background: linear-gradient(135deg, #4475aa, #b92119, #4475aa);
   color: #fff;
 }
 
@@ -148,10 +148,10 @@
 }
 
 .jour-layout .accordion-content {
-  margin: 10px 0 15px;
+  margin: 8px 0 12px;
   padding: 15px 20px;
   background: #f7f9fc;
-  border-left: 5px solid #0c3a6a;
+  border-left: 5px solid #b92119;
   border-radius: 12px;
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.05);
   font-size: 14px;
@@ -161,7 +161,7 @@
 /* --- Contenu droit décoratif --- */
 .jour-layout .content {
   flex: 1;
-  padding: 35px;
+  padding: 30px;
   overflow-y: auto;
   background: #ffffff;
   border-radius: 18px;
@@ -183,7 +183,7 @@
 .jour-layout .content::before {
   width: 200px;
   height: 200px;
-  background: #8fc9eb;
+  background: #a3c7db;
   top: -60px;
   right: -80px;
 }
@@ -199,9 +199,10 @@
 
 /* Titres contenu */
 .jour-layout .content h1 {
-  margin-bottom: 28px;
+  margin-bottom: 22px;
   font-size: 28px;
-  background: linear-gradient(90deg, #0c3a6a, #8fc9eb);
+  background: linear-gradient(90deg, 135deg, #0c3a6a, #bbd9eb, #1f4670, #bbd9eb);
+  padding: 30px 20px;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
@@ -209,10 +210,10 @@
 
 .jour-layout .content h2 {
   color: #0c3a6a;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   font-size: 22px;
   font-weight: 600;
-  border-bottom: 3px solid #0c3a6a;
+  border-bottom: 3px solid #b92119;
   padding-bottom: 6px;
 }
 
@@ -220,8 +221,8 @@
 .jour-layout .card {
   background: #ffffff;
   border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 28px;
+  padding: 25px;
+  margin-bottom: 18px;
   box-shadow: 0 12px 30px rgba(0,0,0,0.12);
   transition: all 0.3s ease;
   opacity: 0;
@@ -237,8 +238,8 @@
 /* Boutons */
 .jour-layout .btn {
   display: inline-block;
-  margin: 8px 10px 8px 0;
-  padding: 12px 22px;
+  margin: 6px 8px 6px 0;
+  padding: 10px 20px;
   font-size: 14px;
   font-weight: 600;
   border-radius: 16px;
@@ -252,7 +253,7 @@
 }
 
 .jour-layout .btn:hover {
-  background: linear-gradient(135deg, #8fc9eb, #0c3a6a);
+  background: linear-gradient(135deg, #4475aa, #b92119, #4475aa);
   transform: scale(1.1) translateY(-2px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
@@ -260,9 +261,9 @@
 /* Quiz */
 .jour-layout .quiz-card label {
   display: block;
-  margin: 8px 0;
+  margin: 6px 0;
   cursor: pointer;
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-radius: 12px;
   transition: all 0.3s ease;
   background: #f0f8ff;
@@ -283,7 +284,7 @@
 
 /* iframe */
 .jour-layout .preview-frame {
-  margin-top: 12px;
+  margin-top: 8px;
   border-radius: 16px;
   border: 1px solid #ccc;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -348,3 +349,62 @@
   .jour-layout .quiz-card label { font-size: 13px; padding: 5px 10px; }
   .jour-layout .preview-frame { width: 100%; height: auto; }
 }
+
+/* Supports en 2 colonnes */
+.supports-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+  column-gap: 4px;  /* espace horizontal */
+  row-gap: 0px;     /* espace vertical réduit */
+}
+
+/* Responsive : 1 colonne sur mobile */
+@media (max-width: 768px) {
+  .supports-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* H3 stylé comme H2 mais spécifique aux supports */
+.supports-container .card h3 {
+  font-size: 17px; /* tu peux ajuster */
+  font-weight: bold;
+  margin-bottom: 12px;
+  /* text-transform: lowercase; */
+  background: linear-gradient(90deg, #0c3a6a, #8fc9eb);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 5s ease infinite;
+  font-family: "Arial", sans-serif; /* tu peux changer la police ici */
+}
+
+
+/* Bouton Dashboard en bas à droite du sidebar */
+.sidebar-dashboard-btn {
+  position: absolute;
+  bottom: 20px;       /* distance depuis le bas du sidebar */
+  right: 20px;        /* distance depuis le bord droit du sidebar */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: #b92119; /* rouge */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.sidebar-dashboard-btn:hover {
+  background-color: #9a1a16;
+  transform: translateY(-2px);
+}
+
+.sidebar-dashboard-btn .icon {
+  font-size: 1rem;
+}
+
+
